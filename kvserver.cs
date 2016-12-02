@@ -16,7 +16,7 @@ using Thrift.Server;
 namespace kvserver {
     class Program {
         public class ThriftServiceHandler : KVStore.Iface {
-            private Dictionary<string, string> kv;
+            private Dictionary<string, string> kv = new Dictionary<string, string>();
 
             public Result kvset(string key, string value) {
                 Console.WriteLine("\tkvset");
@@ -32,14 +32,14 @@ namespace kvserver {
                 Console.WriteLine("\tkvget");
                 Result result = new Result();
                 if (kv.ContainsKey(key)) {
-                    result.Value = "";
-                    result.Error = (ErrorCode)1;
-                    result.Errortext = "Key not found";
-                }
-                else {
                     result.Value = kv[key];
                     result.Error = (ErrorCode)0;
                     result.Errortext = "";
+                }
+                else {
+                    result.Value = "";
+                    result.Error = (ErrorCode)1;
+                    result.Errortext = "Key Not Found";
                 }
                 return result;
             }
@@ -48,15 +48,15 @@ namespace kvserver {
                 Console.WriteLine("\tkvdelete");
                 Result result = new Result();
                 if (kv.ContainsKey(key)) {
-                    result.Value = "";
-                    result.Error = (ErrorCode)1;
-                    result.Errortext = "Key not found";
-                }
-                else {
                     kv.Remove(key);
                     result.Value = "";
                     result.Error = (ErrorCode)0;
                     result.Errortext = "";
+                }
+                else {
+                    result.Value = "";
+                    result.Error = (ErrorCode)1;
+                    result.Errortext = "Key not found";
                 }
                 return result;
             }
