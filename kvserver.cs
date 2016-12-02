@@ -67,14 +67,17 @@ namespace kvserver {
             for (int i = 0; i < args.Length; ++i)
                 if (args[i] == "-port") int.TryParse(args[i + 1], out port);
 
-            var handler = new ThriftServiceHandler();
-            var processor = new KVStore.Processor(handler);
+            try {
+                var handler = new ThriftServiceHandler();
+                var processor = new KVStore.Processor(handler);
 
-            TServerTransport transport = new TServerSocket(port);
-            TServer server = new TThreadPoolServer(processor, transport);
+                TServerTransport transport = new TServerSocket(port);
+                TServer server = new TThreadPoolServer(processor, transport);
 
-            Console.WriteLine("Server Start");
-            server.Serve();
+                Console.WriteLine("Server Start");
+                server.Serve();
+            }
+            catch (Exception e) { Console.WriteLine(e.ToString()); }
         }
     }
 }
