@@ -26,7 +26,7 @@ namespace kvclient {
             }
 
             try {
-                var transport = new TSocket("localhost", 9090);
+                var transport = new TSocket(host, port);
                 var protocol = new TBinaryProtocol(transport);
                 var client = new KVStore.Client(protocol);
 
