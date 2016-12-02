@@ -1,6 +1,6 @@
 //
 //  Munieshwar (Kevin) Ramdass
-//  Profesor Kurt Harlem
+//  Profesor Kurt R.
 //  CS-GY 9223 H
 //  15 October 2016
 //
