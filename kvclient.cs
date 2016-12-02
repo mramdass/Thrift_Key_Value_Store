@@ -29,6 +29,8 @@ namespace kvclient {
                 var transport = new TSocket(host, port);
                 var protocol = new TBinaryProtocol(transport);
                 var client = new KVStore.Client(protocol);
+                client.InputProtocol.Transport.Open();
+                //transport.Open();
 
                 Result result = new Result();
                 for (int i = 0; i < args.Length; ++i) {
@@ -36,9 +38,9 @@ namespace kvclient {
                     else if (args[i] == "-get") result = client.kvget(args[i + 1]);
                     else if (args[i] == "-delete") result = client.kvdelete(args[i + 1]);
                 }
-                Console.WriteLine("\tValue: " + result.Value + "\n\tErrorCode: " + result.Error + "\n\tErrorText" + result.Errortext);
+                Console.WriteLine("\tValue: " + result.Value + "\n\tErrorCode: " + result.Error + "\n\tErrorText: " + result.Errortext);
 
-                transport.Open();
+                
             }
             catch (Exception e) { Console.WriteLine(e.ToString()); }
         }
