@@ -20,7 +20,7 @@ namespace kvserver {
 
             public Result kvset(string key, string value) {
                 Console.WriteLine("\tkvset");
-                kv.Add(key, value);
+                kv[key] = value;
                 Result result = new Result();
                 result.Value = "";
                 result.Error = (ErrorCode)0;
